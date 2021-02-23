@@ -1,0 +1,219 @@
+model {
+
+  # Priors ------------------------------------------------------------------
+  int.psi.mean ~ dunif(0, 1) # initial occupancy intercept
+  beta.psi.0.mean <- logit(int.psi.mean)
+  beta.psi.1.mean ~ dnorm(0, 0.1) # linear elevation
+  beta.psi.2.mean ~ dnorm(0, 0.1) # quadratic elevation
+  beta.phi.1.mean ~ dnorm(0, 0.1) # persistence temperature deviations
+  beta.phi.2.mean ~ dnorm(0, 0.1) # persistence precipitation deviations
+  beta.phi.3.mean ~ dnorm(0, 0.01) # persistence elevation 
+  beta.phi.4.mean ~ dnorm(0, 0.01) # persistence temp x elevation
+  beta.phi.5.mean ~ dnorm(0, 0.01) # persistence ppt x elevation
+  beta.gamma.1.mean ~ dnorm(0, 0.1) # colonization temperature deviations
+  beta.gamma.2.mean ~ dnorm(0, 0.1) # colonization precipitation deviations
+  beta.gamma.3.mean ~ dnorm(0, 0.01) # elevation 
+  beta.gamma.4.mean ~ dnorm(0, 0.01) # colonization temp x elevation
+  beta.gamma.5.mean ~ dnorm(0, 0.01) # colonization ppt x elevation
+  alpha.eb.0.mean <- logit(int.alpha.eb.mean) # eBird detection intercept
+  int.alpha.eb.mean ~ dunif(0, 1) # eBird detection intercept
+  alpha.eb.1.mean ~ dnorm(0, 0.1) # observation
+  alpha.eb.2.mean ~ dnorm(0, 0.1) # distance
+  alpha.eb.3.mean ~ dnorm(0, 0.1) # day 
+  alpha.eb.4.mean ~ dnorm(0, 0.1) # day^2
+  alpha.eb.5.mean ~ dnorm(0, 0.1) # time of day
+  alpha.eb.6.mean ~ dnorm(0, 0.1) # length of survey
+  int.phi.mean ~ dunif(0, 1) # time-specific persistence intercept
+  beta.phi.0.mean <- logit(int.phi.mean)
+  int.gamma.mean ~ dunif(0, 1) # time-specific colonization intercept
+  beta.gamma.0.mean <- logit(int.gamma.mean)
+  int.alpha.hb.mean ~ dunif(0, 1) # year-specific hb det int
+  alpha.hb.0.mean <- logit(int.alpha.hb.mean)
+  tau.alpha.hb.0 ~ dgamma(0.1, 0.1)
+  alpha.hb.1.mean ~ dnorm(0, 0.1) # day
+  alpha.hb.2.mean ~ dnorm(0, 0.1) # day^2
+  alpha.hb.3.mean ~ dnorm(0, 0.1) # time of day
+  int.alpha.neon.mean ~ dunif(0, 1) # year-specific neon det int
+  alpha.neon.0.mean <- logit(int.alpha.neon.mean)
+  tau.alpha.neon.0 ~ dgamma(0.1, 0.1)
+  alpha.neon.1.mean ~ dnorm(0, 0.1) # day
+  alpha.neon.2.mean ~ dnorm(0, 0.1) # day^2
+  alpha.neon.3.mean ~ dnorm(0, 0.1) # hour
+  tau.beta.psi.0 ~ dgamma(0.1, 0.1)
+  tau.beta.psi.1 ~ dgamma(0.1, 0.1)
+  tau.beta.psi.2 ~ dgamma(0.1, 0.1)
+  tau.beta.phi.0 ~ dgamma(0.1, 0.1)
+  tau.beta.phi.1 ~ dgamma(0.1, 0.1)
+  tau.beta.phi.2 ~ dgamma(0.1, 0.1)
+  tau.beta.phi.3 ~ dgamma(0.1, 0.1)
+  tau.beta.phi.4 ~ dgamma(0.1, 0.1)
+  tau.beta.phi.5 ~ dgamma(0.1, 0.1)
+  tau.beta.gamma.0 ~ dgamma(0.1, 0.1)
+  tau.beta.gamma.1 ~ dgamma(0.1, 0.1)
+  tau.beta.gamma.2 ~ dgamma(0.1, 0.1)
+  tau.beta.gamma.3 ~ dgamma(0.1, 0.1)
+  tau.beta.gamma.4 ~ dgamma(0.1, 0.1)
+  tau.beta.gamma.5 ~ dgamma(0.1, 0.1)
+  tau.alpha.eb.0 ~ dgamma(0.1, 0.1)
+  tau.alpha.eb.1 ~ dgamma(0.1, 0.1)
+  tau.alpha.eb.2 ~ dgamma(0.1, 0.1)
+  tau.alpha.eb.3 ~ dgamma(0.1, 0.1)
+  tau.alpha.eb.4 ~ dgamma(0.1, 0.1)
+  tau.alpha.eb.5 ~ dgamma(0.1, 0.1)
+  tau.alpha.eb.6 ~ dgamma(0.1, 0.1)
+  tau.alpha.hb.1 ~ dgamma(0.1, 0.1)
+  tau.alpha.hb.2 ~ dgamma(0.1, 0.1)
+  tau.alpha.hb.3 ~ dgamma(0.1, 0.1)
+  tau.alpha.neon.1 ~ dgamma(0.1, 0.1)
+  tau.alpha.neon.2 ~ dgamma(0.1, 0.1)
+  tau.alpha.neon.3 ~ dgamma(0.1, 0.1)
+
+  # Species-specific coefficients -----------------------------------------
+  for (k in 1:K) {
+    beta.psi.0[k] ~ dnorm(beta.psi.0.mean, tau.beta.psi.0)
+    logit(int.psi[k]) <- beta.psi.0[k]
+    beta.psi.1[k] ~ dnorm(beta.psi.1.mean, tau.beta.psi.1)
+    beta.psi.2[k] ~ dnorm(beta.psi.2.mean, tau.beta.psi.2)
+    beta.phi.1[k] ~ dnorm(beta.phi.1.mean, tau.beta.phi.1)
+    beta.phi.2[k] ~ dnorm(beta.phi.2.mean, tau.beta.phi.2)
+    beta.phi.3[k] ~ dnorm(beta.phi.3.mean, tau.beta.phi.3)
+    beta.phi.4[k] ~ dnorm(beta.phi.4.mean, tau.beta.phi.4)
+    beta.phi.5[k] ~ dnorm(beta.phi.5.mean, tau.beta.phi.5)
+    beta.gamma.1[k] ~ dnorm(beta.gamma.1.mean, tau.beta.gamma.1)
+    beta.gamma.2[k] ~ dnorm(beta.gamma.2.mean, tau.beta.gamma.2)
+    beta.gamma.3[k] ~ dnorm(beta.gamma.3.mean, tau.beta.gamma.3)
+    beta.gamma.4[k] ~ dnorm(beta.gamma.4.mean, tau.beta.gamma.4)
+    beta.gamma.5[k] ~ dnorm(beta.gamma.5.mean, tau.beta.gamma.5)
+    alpha.eb.0[k] ~ dnorm(alpha.eb.0.mean, tau.alpha.eb.0)
+    alpha.eb.1[k] ~ dnorm(alpha.eb.1.mean, tau.alpha.eb.1)
+    alpha.eb.2[k] ~ dnorm(alpha.eb.2.mean, tau.alpha.eb.2)
+    alpha.eb.3[k] ~ dnorm(alpha.eb.3.mean, tau.alpha.eb.3)
+    alpha.eb.4[k] ~ dnorm(alpha.eb.4.mean, tau.alpha.eb.4)
+    alpha.eb.5[k] ~ dnorm(alpha.eb.5.mean, tau.alpha.eb.5)
+    alpha.eb.6[k] ~ dnorm(alpha.eb.6.mean, tau.alpha.eb.6)
+    for (t in 1:n.years) {
+      beta.phi.0[k, t] ~ dnorm(beta.phi.0.mean, tau.beta.phi.0)
+      logit(int.phi[k, t]) <- beta.phi.0[k, t]
+      beta.gamma.0[k, t] ~ dnorm(beta.gamma.0.mean, tau.beta.gamma.0)
+      logit(int.gamma[k, t]) <- beta.gamma.0[k, t]
+      alpha.hb.0[k, t] ~ dnorm(alpha.hb.0.mean, tau.alpha.hb.0)
+    } # t
+    alpha.hb.1[k] ~ dnorm(alpha.hb.1.mean, tau.alpha.hb.1)
+    alpha.hb.2[k] ~ dnorm(alpha.hb.2.mean, tau.alpha.hb.2)
+    alpha.hb.3[k] ~ dnorm(alpha.hb.3.mean, tau.alpha.hb.3)
+    for (t in 1:n.years.neon) {
+      alpha.neon.0[k, t] ~ dnorm(alpha.neon.0.mean, tau.alpha.neon.0)
+    } # t
+    alpha.neon.1[k] ~ dnorm(alpha.neon.1.mean, tau.alpha.neon.1)
+    alpha.neon.2[k] ~ dnorm(alpha.neon.2.mean, tau.alpha.neon.2)
+    alpha.neon.3[k] ~ dnorm(alpha.neon.3.mean, tau.alpha.neon.3)
+  } # k
+
+  # Process Models and Likelihoods ----------------------------------------
+  for (k in 1:K) {
+    for (i in 1:R) {
+      # Initial Occupancy
+      logit(psi.0[i, k]) <- beta.psi.0[k] + 
+                            beta.psi.1[k] * ELEV[i] + 
+                            beta.psi.2[k] * pow(ELEV[i], 2)
+      z[i, k, 1] ~ dbern(psi.0[i, k])
+      for (t in 1:(n.years - 1)) {
+        # Persistence
+        logit(phi[i, k, t]) <- beta.phi.0[k, t] +
+                               beta.phi.1[k] * TMEAN[i, t] + 
+                               beta.phi.2[k] * PPT[i, t] + 
+                               beta.phi.3[k] * ELEV[i] + 
+                               beta.phi.4[k] * TMEAN[i, t] * ELEV[i] + 
+                               beta.phi.5[k] * PPT[i, t] * ELEV[i]
+        # Colonization
+        logit(gamma[i, k, t]) <- beta.gamma.0[k, t] +
+                                 beta.gamma.1[k] * TMEAN[i, t] + 
+                                 beta.gamma.2[k] * PPT[i, t] + 
+                                 beta.gamma.3[k] * ELEV[i] + 
+                                 beta.gamma.4[k] * TMEAN[i, t] * ELEV[i] + 
+                                 beta.gamma.5[k] * PPT[i, t] * ELEV[i]  
+        z[i, k, t + 1] ~ dbern(z[i, k, t] * phi[i, k, t] + (1 - z[i, k, t]) * gamma[i, k, t])
+      } # t
+    } # i
+
+    for (t in 1:n.years) {
+
+      # HB Data -----------------------------------------------------------
+      for (i in 1:R.hb) {
+        for (j in 1:J.hb) {
+          logit(p.hb[i, j, k, t]) <- alpha.hb.0[k, t] + 
+                                     alpha.hb.1[k] * DAY.hb[i, j, t] + 
+                                     alpha.hb.2[k] * DAY.hb[i, j, t]^2 + 
+                                     alpha.hb.3[k] * TOD.hb[i, j, t] 
+          C[i, j, k, t] ~ dbern(p.hb[i, j, k, t] * z[pixel.hb[i], k, t])
+        } # j
+      } # i
+
+      # eBird Data --------------------------------------------------------
+      for (l in 1:R.eb) {
+        # Change of support
+        z.eb[l, k, t] <- ifelse(sum(z[low[l]:high[l], k, t]) > 0, 1, 0)
+        for (j in 1:J.eb) {
+          logit(p.eb[j, l, k, t]) <- alpha.eb.0[k] + 
+                                     alpha.eb.1[k] * OBSV[j, l, t] +  
+                                     alpha.eb.2[k] * DIST[j, l, t] + 
+                                     alpha.eb.3[k] * DAY.eb[j, l, t] + 
+                                     alpha.eb.4[k] * DAY.eb[j, l, t]^2 + 
+                                     alpha.eb.5[k] * TIME.eb[j, l, t] + 
+                                     alpha.eb.6[k] * LENGTH[j, l, t]
+          y[j, l, k, t] ~ dbern(p.eb[j, l, k, t] * z.eb[l, k, t]) 
+        } # j
+      } # l
+    } # t
+
+    # NEON Data -----------------------------------------------------------
+    for (t in 1:n.years.neon) {
+      for (i in 1:R.neon) {
+        logit(p.neon[i, k, t]) <- alpha.neon.0[k, t] + 
+                                  alpha.neon.1[k] * DAY.neon[i, t] + 
+                                  alpha.neon.2[k] * DAY.neon[i, t]^2 + 
+                                  alpha.neon.3[k] * HOUR.neon[i, t]
+        x[i, k, t] ~ dbern(p.neon[i, k, t] * z[pixel.neon[i], k, neon.years[t]])
+      } # i
+    } # t
+  } # k
+
+  # Draw missing covariates -----------------------------------------------
+  # Process ---------------------------
+  for (i in 1:R) {
+    ELEV[i] ~ dnorm(0, 1)
+    for (t in 1:n.years) {
+      PPT[i, t] ~ dnorm(0, 1)
+      TMEAN[i, t] ~ dnorm(0, 1)
+    } # t
+  } # i
+  # NEON ------------------------------
+  for (i in 1:R.neon) {
+    for (t in 1:n.years.neon) {
+      DAY.neon[i, t] ~ dnorm(0, 1)
+      HOUR.neon[i, t] ~ dnorm(0, 1)
+    } # t
+  } # i
+  # HB --------------------------------
+  for (i in 1:R.hb) {
+    for (t in 1:n.years) {
+      for (j in 1:J.hb) {
+        DAY.hb[i, j, t] ~ dnorm(0, 1)
+        TOD.hb[i, j, t] ~ dnorm(0, 1)
+      } # j
+    } # t
+  } # i
+  # eBird -----------------------------
+  for (l in 1:R.eb) { 
+    for (t in 1:n.years) {
+      for (j in 1:J.eb) {
+        OBSV[j, l, t] ~ dnorm(0, 1)
+        DIST[j, l, t] ~ dnorm(0, 1)
+        DAY.eb[j, l, t] ~ dnorm(0, 1)
+        TIME.eb[j, l, t] ~ dnorm(0, 1)
+        LENGTH[j, l, t] ~ dnorm(0, 1) 
+      } # j  
+    } # t 
+  } # l
+
+}
