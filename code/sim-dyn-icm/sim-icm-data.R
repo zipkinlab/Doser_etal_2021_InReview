@@ -33,8 +33,7 @@ sim.icm.data <- function(R, R.eb, R.hb, R.neon, beta.psi.0, beta.psi.1,
     } # i
   }
   # Form persistence covariate -----------------------------------------------
-  # Persistence varies across space, should test with varying across time
-  # as well. 
+  # Persistence varies across space and time
   n.beta.phi <- 2
   X.phi <- array(1, dim = c(R, n.years - 1, n.beta.phi))
   if (n.beta.phi > 1) {
@@ -45,8 +44,7 @@ sim.icm.data <- function(R, R.eb, R.hb, R.neon, beta.psi.0, beta.psi.1,
     } # i
   }
   # Form colonization covariate -------------------------------------------
-  # Colonization varies across space, should test with varying across time
-  # as well. 
+  # Colonization varies across space and time
   n.beta.gamma <- 2
   X.gamma <- array(1, dim = c(R, n.years - 1, n.beta.gamma))
   if (n.beta.gamma > 1) {
