@@ -13,3 +13,4 @@
 11. `summary-sim-2.R`: summary file that summarizes results of second simulation study and produces figures. 
 12. `summary-sim-3.R`: summary file that summarizes results of third simulation study and produces figures. 
 
+Complete results of simulation study are not currently included on GitHub due to file size limits. If these results are desired, please contact the first author (doserjef@msu.edu). 
