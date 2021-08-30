@@ -1,0 +1,8 @@
+# Foliage-gleaning Bird Case Study
+
++ `data-prep.R`: code to extract raw data from HBEF, BBS, and NEON raw data files into a format suitable for analysis.
++ All files beginning with `main` are used to run the ICOM through NIMBLE using the specific data soruces listed in the file name. 
++. `nimble-code`: directory containing BUGS code and associated information required for running different forms of the ICOM via NIMBLE in R. File names denote the specific model and the specific data sets included in the model. 
++ `post-hoc`: directory containing R scripts for post-hoc processing of NIMBLE results. Each file is used to process the model results using the data sets included in the file name. These scripts contain code for generating biodiversity metrics, as well as the Gibbs sampler for the post-hoc linear regression to determine species-specific occurrence trends. The raw NIMBLE output files used in these scripts are too large to include on GitHub as they include posterior samples for each latent occupancy state. The resulting summary files generated from scripts in this directory are included in the `results` directory, which have NIMBLE results for parameters of interest as well as community level biodiversity metrics. Contact Jeff Doser (doserjef@msu.edu) for the raw NIMBLE files for the full posterior of the latent occurrence states. 
++ `summary-model-comparison.R`: file to compare results of seven models that use different amounts of HBEF, NEON, and BBS data for the foliage-gleaning bird case study. Contains code used to generate final tables and figures in manuscript. 
++ `summary.R`: file used to summarize additional results from the full ICOM for the foliage-gleaning bird case study. 
