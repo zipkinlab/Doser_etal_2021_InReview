@@ -1,4 +1,4 @@
-# [Integrated community occupancy models: A framework to assess occurrence and biodiversity dynamics using multiple data sources]
+# Integrated community occupancy models: A framework to assess occurrence and biodiversity dynamics using multiple data sources
 
 ### In review
 
@@ -20,7 +20,7 @@ ________________________________________________________________________________
 
 ### [Code](./code)
 
-Contains code for the case study and simulations. See each subdirectory for README files describing the file contents. For running the ICOM and adapting it to different data sets, we recommend starting in the [simulations](./code/simulations) directory with the [main.R](./code/simulations/main.R). 
+Contains code for the case study and simulations. See each subdirectory for README files describing the file contents. For running the ICOM and adapting it to different data sets, we recommend starting in the [simulations](./code/simulations) directory with [main.R](./code/simulations/main.R). 
 
 ## [Data](./data)
 
