@@ -1,4 +1,4 @@
-# [Integrated community occupancy models: A framework to assess occurrence and biodiversity dynamics using multiple data sources](https://arxiv.org/abs/2109.01894)
+# [Integrated community occupancy models: A framework to assess occurrence and biodiversity dynamics using multiple data sources](https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.13811)
 
 ### In press, Methods in Ecology and Evolution
 
