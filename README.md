@@ -1,6 +1,6 @@
 # [Integrated community occupancy models: A framework to assess occurrence and biodiversity dynamics using multiple data sources](https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.13811)
 
-### In press, Methods in Ecology and Evolution
+### Methods in Ecology and Evolution
 
 ### Jeffrey W. Doser, Wendy Leuenberger, T. Scott Sillett, Michael T. Hallworth, Elise F. Zipkin
 
