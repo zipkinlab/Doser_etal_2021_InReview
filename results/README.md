@@ -1,6 +1,6 @@
-## [Results](./results)
+## Results
 
-+ [cross-val](./results/cross-val): subdirectory containing posterior predictive performance metrics for different models in the foliage-gleaning bird case study. 
++ [cross-val](./cross-val): subdirectory containing posterior predictive performance metrics for different models in the foliage-gleaning bird case study. 
 + `icom-HBEF-results.R`: results of model fit using only HBEF data. 
 + `icom-NEON-results.R`: results of model fit using only NEON data. 
 + `icom-BBS-results.R`: results of model fit using only BBS data. 
