@@ -18,7 +18,7 @@ ________________________________________________________________________________
 
 ## Repository Directory
 
-### [Published PDF]("Doser et al. - 2022 - Integrated community occupancy models A framework.pdf")
+### [Published PDF](Doser_etal_2022_MEE_ICOM.pdf)
 
 ### [Code](./code)
 
