@@ -26,7 +26,7 @@ Contains code for the case study and simulations. See each subdirectory for READ
 
 ## [Data](./data)
 
-**NOTE**: On November 13, 2023, NEON discovered an error in the point-level spatial locations of the bird point count data. Some of the point count data were associated with the incorrect spatial location. This analysis was performed with NEON data accessed in June 2020, and so the exact locations of each NEON data point are incorrect. Given our focus on assessing temporal trends in occurrence over the 10 year period, and the fact that NEON data were only available for 4 of the 10 years of the study period, we do not believe this has any substantial implications on the case study results presented in the manuscript.
+**NOTE**: On November 13, 2023, NEON discovered an error in the point-level spatial locations of the bird point count data. Some of the point count data were associated with the incorrect spatial location. This analysis was performed with NEON data accessed in June 2020, and so the exact locations of each NEON data point are incorrect. Given our focus on assessing temporal trends in occurrence over the 10 year period, and the fact that NEON data were only available for 4 of the 10 years of the study period, we do not believe this has any substantial implications on the case study results presented in the manuscript. More specific details from NEON on the error can be found [here](https://www.neonscience.org/impact/observatory-blog/bird-point-ids-within-grids-were-transposed-resulting-inaccurate-point).
 
 + `final-bird-data.R`: the foliage-gleaning bird data used in the case study.
 + `nimble-data.R`: contains the same data as `final-bird-data.R` but is processed and stored for direct input into NIMBLE. 
